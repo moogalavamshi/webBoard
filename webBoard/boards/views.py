@@ -5,8 +5,8 @@ from .models import Board
 
 
 def home(request):
-    html = ''
-    for board in Board.objects.all():
-        html += '<br>' + board.name
-
-    return HttpResponse(html)
+    boards = Board.objects.all()
+    context = {
+        'boards': boards
+    }
+    return render(request, 'home.html', context)
