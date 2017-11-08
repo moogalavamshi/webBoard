@@ -21,5 +21,13 @@
       {{ field.help_text|safe }}
       </small>
     {% endif %}
+    {% if form.non_field_errors %}
+      <div class="alert alert-danger" role="alert">
+        {% for error in form.non_field_errors %}
+          <p{% if forloop.last %} class="mb-0"{% endif %}>{{ error }}</p>
+          {# The {% if forloop.last %} is just a minor thing. Because the p tag has a margin-bottom. And a form may have several non-field errors. For each non-field error, we render a p tag with the error. Then I’m checking if it’s the last error to render. If so, we add a Bootstrap 4 CSS class mb-0 which stands for “margin bottom = 0”. Then the alert doesn’t look weird, with some extra space. Again, just a very minor detail. I did that just to keep the consistency of the spacing #}
+        {% endfor %}
+      </div>
+    {% endif %}
   </div>
 {% endfor %}
